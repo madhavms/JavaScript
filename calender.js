@@ -25,7 +25,7 @@ printcalender(year,month);
 }
 function printheader(month,year)
 {
-console.log(' '+' '+' '+' '+' '+' '+monthsofyear[month-1]+' '+year);
+console.log(' '+' '+' '+' '+' '+monthsofyear[month-1]+' '+year);
 console.log();
 console.log(d);
 
