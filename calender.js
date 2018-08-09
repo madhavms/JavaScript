@@ -1,182 +1,202 @@
-function checkleap(yr)
+var daysofweek=['sun','mon','tue','wed','thu','fri','sat'];
+var monthsofyear=['jan','feb','mar','apr','may','jun','july','aug','sep','oct','nov','dec'];
+var daysofmonth=['31','28','31','30','31','30','31','31','30','31','30','31'];
+var yearbegsun=[0,3,3,6,1,4,6,2,5,0,3,5];
+var yearbegsunleap=[0,3,4,0,2,5,0,3,6,1,5,6];
+var a = [];
+    for(var i = 0; i <12; ++i) { a.push(''); }
+    console.log('this is a');
+    console.log(a);
+cal();
+function cal()
 {
-  return ((yr % 4 == 0) && (yr % 100 != 0)) || (yr % 400 == 0);
+  var month=process.argv[2];
+  var year=process.argv.slice(3);
+  console.log('is leap or not');
+  console.log(isleap(year));
+  validate(year,month);
+  console.log('month is');
+  console.log(month);
+  leap(year)
+  setdatearray(year,month);
+  console.log('array after set');
+  console.log(yearbegsun);
+  getcalender(year,month);
+
+  printcalender(year,month);
+
 }
-
-var year = 2008;
-var month = 5;
-var febd;
-var calender = [
-  ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA',],
-  ['..','..','..','..','..','..','..',],
-  ['..','..','..','..','..','..','..',],
-  ['..','..','..','..','..','..','..',],
-  ['..','..','..','..','..','..','..',],
-  ['..','..','..','..','..','..','..',],
-  ['..','..','..','..','..','..','..',],
-];
-
-function setcal(monthd,month)
+function leap(year)
 {
-  var i=1,j;
-  mond=days[month-1];
-  var c =1;
-  for(j=monthd;j<7;j++)
-  {
-    if (c<10)
-    {
-      calender[i][j] = ' '+c;
-      c++;
-    }
-    else
-    {
-      calender[i][j] = c;
-      c++;
-    }
-  }
-
-  for (i=2;i<7;i++)
-  {
-    for(j=0;j<7;j++)
-    {
-      if (c>mond) {
-        continue;
-      }
-      if (c<10)
-      {
-        calender[i][j] = ' '+c;
-        c++;
-      }
-      else
-      {
-        calender[i][j] = c;
-        c++;
-      }
-    }
-  }
+  if(isleap(year)==true)
+  daysofmonth[1]=29
+}
+function validate(year,month)
+{
+  return true;
+if (year<0)
+{
+  console.log("year should not be BC");
+  return false;
+}
+if (month>12)
+{
+  console.log("invalid month");
+  return false;
 }
 
 
 
-function printyear(calender)
-{
-  var i,j;
-  for(i=0;i<7;i++)
-  {monthd
-    console.log(calender[i][0]+" "+calender[i][1]+" "+calender[i][2]+" "+calender[i][3]+" "+calender[i][4]+" "+calender[i][5]+" "+calender[i][6]);
-  }
-}
-
-function setbl()
-{
-  var  i,j;
-  for (i = 0; i < 7; i++)
-    for (j = 0; j < 7 ;j++)
-    {
-      if (calender[i][j]=='..')
-      {
-        calender[i][j]='  '
-      }
-    }
 }
 
 
+function getcalender(year,month)
+{
 
-
-
-var leapoff =[];
-var nonleapoff =[];
-
-var f = checkleap(year)
-if (f)
-   febd=29;
+console.log("hero");
+var x=0
+var z=1
+var k
+if(isleap(year)==true)
+k=yearbegsunleap[month-1]
 else
-  febd=28;
+k=yearbegsun[month-1]
+  console.log('k values')
 
-days = [31,febd,31,30,31,30,31,31,30,31,30,31];
-var yeard = year-2000;
-var leapd = yeard/4;
-yeard = Math.ceil(yeard)
-leapd = Math.ceil(leapd)
-//console.log(yeard);
-// console.log(leapd);
-
-var diff = (yeard-leapd)+(2*leapd);
-
-//console.log(diff);
-
-diff = diff%7;
-//console.log(diff);
-var totalspend=0
-var monthd=0
-
-switch (month) {
-  case 0:
-        totalspend=0;
-        monthd=totalspend%7;
-    break;
-  case 1:
-        totalspend=days[0];
-        monthd=totalspend%7;
-    break;
-  case 2:
-          totalspend=days[0]+days[1];
-          monthd=totalspend%7;
-    break;
-  case 3:
-          totalspend=days[0]+days[1]+days[2];
-          monthd=totalspend%7;
-    break;
-  case 4:
-          totalspend=days[0]+days[1]+days[2]+days[3];
-          monthd=totalspend%7;
-    break;
-  case 5:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4];
-          monthd=totalspend%7;
-    break;
-  case 6:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4]+days[5];
-          monthd=totalspend%7;
-    break;
-  case 7:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4]+days[5]+days[6];
-          monthd=totalspend%7;
-    break;
-  case 8:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4]+days[5]+days[6]+days[7];
-          monthd=totalspend%7;
-    break;
-  case 9:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4]+days[5]+days[6]+days[7]+days[8];
-          monthd=totalspend%7;
-    break;
-  case 10:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4]+days[5]+days[6]+days[7]+days[8]+days[9];
-            monthd=totalspend%7;
-    break;
-  case 11:
-          totalspend=days[0]+days[1]+days[2]+days[3]+days[4]+days[5]+days[6]+days[7]+days[8]+days[9]+days[10];
-            monthd=totalspend%7;
-    break;
-
-
-}
-// /console.log(monthd);
-setcal(monthd,month);
-
-setbl()
-/*
-if (f)
+  console.log(yearbegsunleap[month-1])
+  console.log(month)
+if(k>0)
 {
+  for(i=0;i<k;i++)
+    a[x]=a[x]+' '+' '
 
+
+  for(i=k;i<7;i++)
+    {a[x]=a[x]+' '+z
+    z++
+
+
+
+
+
+  while(z<daysofmonth[month-1])
+  {
+  for(i=1;i<6;i++)
+  {x++
+    for(i=0;i<7;i++)
+    {
+      a[x]=a[x]+' '+z
+      z++
+
+    }
+    }
+  }
+}
+
+
+
+if(k==0) {
+  while(z<daysofmonth[month-1])
+  {
+  for(i=0;i<6;i++)
+  {
+    for(i=0;i<7;i++)
+    {
+      a[x]=a[x]+' '+z
+      z++
+    }
+    x++
+  }
+}
+}
+
+function isleap(year)
+
+{
+if((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+return true;
+else
+return false;
+}
+
+
+function printcalender(year,month)
+{
+console.log('hello')
+
+for(var i=0;i<6;i++)
+
+console.log(a[i])
 
 }
 
-*/
+
+function countnoleapyears(year)
+{var k=0
+  for(i=0;i<year;i++)
+  {if(isleap(i)==true)
+   k++
+  }
+  console.log(k);
+  return k
+}
 
 
+function startdayofweek(year,month)
+{
+  b=countnoleapyears(year);
+  console.log('num of leap');
+  console.log(b);
+  console.log('year');
+  console.log(year);
+  var startday=((year-b)*365+(b*366))%7;
+  startday-=1;
+  console.log('startday');
+  console.log(startday);
+  return startday
+  }
 
 
-//console.log(calender)
-printyear(calender)
+function setdatearray(year,month)
+{
+console.log('array before set');
+console.log(yearbegsun);
+  console.log("set date");
+c=startdayofweek(year,month);
+console.log(c);
+diff=c-yearbegsun[0];
+console.log('diff');
+console.log(diff);
+diffarr=[diff,diff,diff,diff,diff,diff,diff,diff,diff,diff,diff,diff];
+console.log('diffarr');
+console.log(diffarr);
+if(isleap(year)==false)
+{
+  console.log('madhav this is not leap');
+  for(var i = 0; i < 12; i++){
+     yearbegsun[i]=yearbegsun[i] + diffarr[i];
+     console.log('HELLOOOO');
+     console.log(yearbegsun[i]);
+   }
+
+     for(i=0;i<12;i++)
+{
+       yearbegsun[i]=yearbegsun[i]%7
+       console.log('hello madhav this is not leap');
+       console.log(yearbegsun[i]);
+  }
+}
+
+
+else{
+  console.log('madhav this is leap');
+  for(var i = 0; i < 12; i++)
+  {yearbegsunleap[i]=(yearbegsunleap[i] + diffarr[i]);
+   console.log('madhav this is leap');
+   console.log(yearbegsunleap[i]);}
+  for(var i=0;i<12;i++){
+    yearbegsunleap[i]=yearbegsunleap[i]%7;
+    console.log('hello madhav this is leap');
+    console.log(yearbegsunleap[i]);
+  }
+}
